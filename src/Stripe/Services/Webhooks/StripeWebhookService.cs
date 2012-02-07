@@ -6,8 +6,11 @@ using Stripe.Infrastructure;
 
 namespace Stripe
 {
-    public class StripeWebhookService
+    public class StripeWebhookService : StripeServiceBase
     {
+		public StripeWebhookService() : base() { }
+		public StripeWebhookService(bool liveMode) : base(liveMode) { }
+
         public StripeInvoiceReady InvoiceReady(string json)
         {
             return Mapper<StripeInvoiceReady>.MapFromJson(json);

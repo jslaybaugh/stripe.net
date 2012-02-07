@@ -13,17 +13,17 @@ namespace Stripe.Tests
 
 		Establish context = () =>
 		{
-			var stripePlanService = new StripePlanService();
+			var stripePlanService = new StripePlanService(false);
             var stripePlan = stripePlanService.Create(test_data.stripe_plan_create_options.Valid());
 
-			var stripeCouponService = new StripeCouponService();
+			var stripeCouponService = new StripeCouponService(false);
             var stripeCoupon = stripeCouponService.Create(test_data.stripe_coupon_create_options.Valid());
 
-			var stripeCustomerService = new StripeCustomerService();
+			var stripeCustomerService = new StripeCustomerService(false);
             var stripeCustomerCreateOptions = test_data.stripe_customer_create_options.ValidCard(stripePlan.Id, stripeCoupon.Id);
             var stripeCustomer = stripeCustomerService.Create(stripeCustomerCreateOptions);
 
-			_stripeInvoiceService = new StripeInvoiceService();
+			_stripeInvoiceService = new StripeInvoiceService(false);
             _stripeInvoiceList = _stripeInvoiceService.List(10, 0, stripeCustomer.Id).ToList();
 		};
 
