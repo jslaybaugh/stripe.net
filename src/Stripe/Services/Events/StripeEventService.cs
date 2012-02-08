@@ -7,13 +7,16 @@ using Newtonsoft.Json;
 
 namespace Stripe
 {
-	public class StripeEventService
+	public class StripeEventService: StripeServiceBase
 	{
+		public StripeEventService() : base() { }
+		public StripeEventService(bool liveMode) : base(liveMode) { }
+
 		public StripeEvent Get(string eventId)
 		{
 			var url = string.Format("{0}/{1}", Urls.Events, eventId);
 
-			var response = Requestor.GetString(url);
+			var response = Requestor.GetString(url, LiveMode);
 
 			return Mapper<StripeEvent>.MapFromJson(response);
 		}
@@ -46,7 +49,7 @@ namespace Stripe
 			}
 
 
-			var response = Requestor.GetString(url);
+			var response = Requestor.GetString(url, LiveMode);
 
 			return Mapper<StripeEvent>.MapCollectionFromJson(response);
 		}
