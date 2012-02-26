@@ -19,7 +19,7 @@ namespace Stripe
 			return Mapper<StripePlan>.MapFromJson(response);
 		}
 
-		public StripePlan Get(string planId)
+        public StripePlan Get(string planId)
 		{
 			var url = string.Format("{0}/{1}", Urls.Plans, planId);
 
@@ -28,14 +28,14 @@ namespace Stripe
 			return Mapper<StripePlan>.MapFromJson(response);
 		}
 
-		public void Delete(string planId)
+        public void Delete(string planId)
 		{
 			var url = string.Format("{0}/{1}", Urls.Plans, planId);
 
 			Requestor.Delete(url, LiveMode);
 		}
 
-		public IEnumerable<StripePlan> List(int count = 10, int offset = 0)
+        public IEnumerable<StripePlan> List(int count = 10, int offset = 0)
 		{
 			var url = Urls.Plans;
 			url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());

@@ -12,8 +12,6 @@ namespace Stripe
 
             var newUrl = url;
 
-			JsonConvert.SerializeObject(obj);
-
             foreach (var property in obj.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance))
             {
                 foreach (var attribute in property.GetCustomAttributes(false))

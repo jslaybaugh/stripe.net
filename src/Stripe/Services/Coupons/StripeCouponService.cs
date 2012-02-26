@@ -19,7 +19,7 @@ namespace Stripe
 			return Mapper<StripeCoupon>.MapFromJson(response);
 		}
 
-		public StripeCoupon Get(string couponId)
+        public StripeCoupon Get(string couponId)
 		{
 			var url = string.Format("{0}/{1}", Urls.Coupons, couponId);
 
@@ -28,14 +28,14 @@ namespace Stripe
 			return Mapper<StripeCoupon>.MapFromJson(response);
 		}
 
-		public void Delete(string couponId)
+        public void Delete(string couponId)
 		{
 			var url = string.Format("{0}/{1}", Urls.Coupons, couponId);
 
 			Requestor.Delete(url, LiveMode);
 		}
 
-		public IEnumerable<StripeCoupon> List(int count = 10, int offset = 0)
+        public IEnumerable<StripeCoupon> List(int count = 10, int offset = 0)
 		{
 			var url = Urls.Coupons;
 			url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());
