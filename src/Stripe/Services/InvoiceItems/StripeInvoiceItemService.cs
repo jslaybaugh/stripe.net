@@ -17,47 +17,47 @@ namespace Stripe
 
 			var response = Requestor.PostString(url, LiveMode);
 
-            return Mapper<StripeInvoiceItem>.MapFromJson(response);
-        }
+			return Mapper<StripeInvoiceItem>.MapFromJson(response);
+		}
 
-        public StripeInvoiceItem Get(string invoiceItemId)
-        {
-            var url = string.Format("{0}/{1}", Urls.InvoiceItems, invoiceItemId);
+		public virtual StripeInvoiceItem Get(string invoiceItemId)
+		{
+			var url = string.Format("{0}/{1}", Urls.InvoiceItems, invoiceItemId);
 
 			var response = Requestor.GetString(url, LiveMode);
 
-            return Mapper<StripeInvoiceItem>.MapFromJson(response);
-        }
+			return Mapper<StripeInvoiceItem>.MapFromJson(response);
+		}
 
-        public StripeInvoiceItem Update(string invoiceItemId, StripeInvoiceItemUpdateOptions updateOptions)
-        {
-            var url = string.Format("{0}/{1}", Urls.InvoiceItems, invoiceItemId);
-            url = ParameterBuilder.ApplyAllParameters(updateOptions, url);
+		public virtual StripeInvoiceItem Update(string invoiceItemId, StripeInvoiceItemUpdateOptions updateOptions)
+		{
+			var url = string.Format("{0}/{1}", Urls.InvoiceItems, invoiceItemId);
+			url = ParameterBuilder.ApplyAllParameters(updateOptions, url);
 
 			var response = Requestor.PostString(url, LiveMode);
 
-            return Mapper<StripeInvoiceItem>.MapFromJson(response);
-        }
+			return Mapper<StripeInvoiceItem>.MapFromJson(response);
+		}
 
-        public void Delete(string invoiceItemId)
-        {
-            var url = string.Format("{0}/{1}", Urls.InvoiceItems, invoiceItemId);
+		public virtual void Delete(string invoiceItemId)
+		{
+			var url = string.Format("{0}/{1}", Urls.InvoiceItems, invoiceItemId);
 
 			Requestor.Delete(url, LiveMode);
         }
 
-        public IEnumerable<StripeInvoiceItem> List(int count = 10, int offset = 0, string customerId = null)
-        {
-            var url = Urls.InvoiceItems;
-            url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());
-            url = ParameterBuilder.ApplyParameterToUrl(url, "offset", offset.ToString());
+		public virtual IEnumerable<StripeInvoiceItem> List(int count = 10, int offset = 0, string customerId = null)
+		{
+			var url = Urls.InvoiceItems;
+			url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());
+			url = ParameterBuilder.ApplyParameterToUrl(url, "offset", offset.ToString());
 
-            if(!string.IsNullOrEmpty(customerId))
-                url = ParameterBuilder.ApplyParameterToUrl(url, "customer", customerId);
+			if(!string.IsNullOrEmpty(customerId))
+				url = ParameterBuilder.ApplyParameterToUrl(url, "customer", customerId);
 
 			var response = Requestor.GetString(url, LiveMode);
 
 			return Mapper<StripeInvoiceItem>.MapCollectionFromJson(response);
-        }
-    }
+		}
+	}
 }

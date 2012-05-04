@@ -21,7 +21,7 @@ namespace Stripe
 			return Mapper<StripeEvent>.MapFromJson(response);
 		}
 
-		public IEnumerable<StripeEvent> List(int count = 10, int offset = 0, StripeEventSearchOptions searchOptions = null)
+		public virtual IEnumerable<StripeEvent> List(int count = 10, int offset = 0, StripeEventSearchOptions searchOptions = null)
 		{
 			var url = Urls.Events;
 			url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());

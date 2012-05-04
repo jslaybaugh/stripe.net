@@ -3,16 +3,8 @@ using Machine.Specifications;
 
 namespace Stripe.Tests
 {
-    public class when_creating_a_customer
-    {
-        protected static StripeCustomerCreateOptions StripeCustomerCreateOptions;
-        protected static StripeCustomer StripeCustomer;
-        protected static StripePlan StripePlan;
-        protected static StripeCoupon StripeCoupon;
-        protected static StripeCard StripeCard;
-
-        private static StripeCustomerService _stripeCustomerService;
-
+	public class when_creating_a_customer	{		protected static StripeCustomerCreateOptions StripeCustomerCreateOptions;		protected static StripeCustomer StripeCustomer;		protected static StripePlan StripePlan;		protected static StripeCoupon StripeCoupon;		protected static StripeCard StripeCard;
+		private static StripeCustomerService _stripeCustomerService;
         Establish context = () =>
         {
             var _stripePlanService = new StripePlanService(false);
@@ -25,13 +17,6 @@ namespace Stripe.Tests
             StripeCustomerCreateOptions = test_data.stripe_customer_create_options.ValidCard(StripePlan.Id, StripeCoupon.Id, DateTime.UtcNow.AddDays(5));
         };
 
-        Because of = () =>
-        {
-            StripeCustomer = _stripeCustomerService.Create(StripeCustomerCreateOptions);
-
-            StripeCard = StripeCustomer.StripeCard;
-        };
-
-        Behaves_like<customer_behaviors> behaviors;
-    }
-}
+		Because of = () =>		{			StripeCustomer = _stripeCustomerService.Create(StripeCustomerCreateOptions);
+			StripeCard = StripeCustomer.StripeCard;		};
+		Behaves_like<customer_behaviors> behaviors;	}}

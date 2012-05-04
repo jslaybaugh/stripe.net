@@ -3,16 +3,16 @@ using Machine.Specifications;
 
 namespace Stripe.Tests
 {
-    public class when_getting_a_customer
-    {
-        protected static StripeCustomerCreateOptions StripeCustomerCreateOptions;
-        protected static StripeCustomer StripeCustomer;
-        protected static StripePlan StripePlan;
-        protected static StripeCoupon StripeCoupon;
-        protected static StripeCard StripeCard;
+	public class when_getting_a_customer
+	{
+		protected static StripeCustomerCreateOptions StripeCustomerCreateOptions;
+		protected static StripeCustomer StripeCustomer;
+		protected static StripePlan StripePlan;
+		protected static StripeCoupon StripeCoupon;
+		protected static StripeCard StripeCard;
 
-        private static StripeCustomerService _stripeCustomerService;
-        private static string _createdStripeCustomerId;
+		private static StripeCustomerService _stripeCustomerService;
+		private static string _createdStripeCustomerId;
 
         Establish context = () =>
         {
@@ -25,17 +25,17 @@ namespace Stripe.Tests
             _stripeCustomerService = new StripeCustomerService(false);
             StripeCustomerCreateOptions = test_data.stripe_customer_create_options.ValidCard(StripePlan.Id, StripeCoupon.Id, DateTime.UtcNow.AddMonths(1));
 
-            var stripeCustomer = _stripeCustomerService.Create(StripeCustomerCreateOptions);
-            _createdStripeCustomerId = stripeCustomer.Id;
-        };
+			var stripeCustomer = _stripeCustomerService.Create(StripeCustomerCreateOptions);
+			_createdStripeCustomerId = stripeCustomer.Id;
+		};
 
-        Because of = () =>
-        {
-            StripeCustomer = _stripeCustomerService.Get(_createdStripeCustomerId);
+		Because of = () =>
+		{
+			StripeCustomer = _stripeCustomerService.Get(_createdStripeCustomerId);
 
-            StripeCard = StripeCustomer.StripeCard;
-        };
+			StripeCard = StripeCustomer.StripeCard;
+		};
 
-        Behaves_like<customer_behaviors> behaviors;
-    }
+		Behaves_like<customer_behaviors> behaviors;
+	}
 }

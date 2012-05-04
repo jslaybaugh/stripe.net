@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Stripe.Infrastructure;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Stripe
 {
@@ -13,6 +9,6 @@ namespace Stripe
 		public dynamic PreviousAttributes { get; set; }
 
 		[JsonProperty("object")]
-		public dynamic Content { get; set; }
+		public dynamic Object { get; set; }
 	}
 }

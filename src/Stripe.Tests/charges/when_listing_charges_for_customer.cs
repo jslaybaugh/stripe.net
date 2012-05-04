@@ -9,6 +9,11 @@ namespace Stripe.Tests
         private static List<StripeCharge> _stripeChargeList;
         private static StripeChargeService _stripeChargeService;
         private static StripeCustomer _stripeCustomer;
+	public class when_listing_charges_for_customer
+	{
+		private static List<StripeCharge> _stripeChargeList;
+		private static StripeChargeService _stripeChargeService;
+		private static StripeCustomer _stripeCustomer;
 
         Establish context = () =>
         {
@@ -17,18 +22,18 @@ namespace Stripe.Tests
 
             _stripeChargeService = new StripeChargeService(false);
 
-            _stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
-            _stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
-            _stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
-            _stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
-            _stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCustomer(_stripeCustomer.Id));
-            _stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCustomer(_stripeCustomer.Id));
-        };
+			_stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
+			_stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
+			_stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
+			_stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCard());
+			_stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCustomer(_stripeCustomer.Id));
+			_stripeChargeService.Create(test_data.stripe_charge_create_options.ValidCustomer(_stripeCustomer.Id));
+		};
 
-        Because of = () =>
-            _stripeChargeList = _stripeChargeService.List(10, 0, _stripeCustomer.Id).ToList();
+		Because of = () =>
+			_stripeChargeList = _stripeChargeService.List(10, 0, _stripeCustomer.Id).ToList();
 
-        It should_have_only_2_entries = () =>
-            _stripeChargeList.Count.ShouldEqual(2);
-    }
+		It should_have_only_2_entries = () =>
+			_stripeChargeList.Count.ShouldEqual(2);
+	}
 }

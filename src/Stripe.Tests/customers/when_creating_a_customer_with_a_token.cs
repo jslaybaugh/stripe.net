@@ -3,16 +3,16 @@ using Machine.Specifications;
 
 namespace Stripe.Tests
 {
-    public class when_creating_a_customer_with_a_token
-    {
-        protected static StripeCustomerCreateOptions StripeCustomerCreateOptions;
-        protected static StripeCustomer StripeCustomer;
-        protected static StripePlan StripePlan;
-        protected static StripeCoupon StripeCoupon;
-        protected static StripeCard StripeCard;
+	public class when_creating_a_customer_with_a_token
+	{
+		protected static StripeCustomerCreateOptions StripeCustomerCreateOptions;
+		protected static StripeCustomer StripeCustomer;
+		protected static StripePlan StripePlan;
+		protected static StripeCoupon StripeCoupon;
+		protected static StripeCard StripeCard;
 
-        private static StripeToken _stripeToken;
-        private static StripeCustomerService _stripeCustomerService;
+		private static StripeToken _stripeToken;
+		private static StripeCustomerService _stripeCustomerService;
 
         Establish context = () =>
         {
@@ -29,13 +29,13 @@ namespace Stripe.Tests
             StripeCustomerCreateOptions = test_data.stripe_customer_create_options.ValidToken(_stripeToken.Id, StripePlan.Id, StripeCoupon.Id, DateTime.UtcNow.AddDays(5));
         };
 
-        Because of = () =>
-        {
-            StripeCustomer = _stripeCustomerService.Create(StripeCustomerCreateOptions);
+		Because of = () =>
+		{
+			StripeCustomer = _stripeCustomerService.Create(StripeCustomerCreateOptions);
 
-            StripeCard = _stripeToken.StripeCard;
-        };
+			StripeCard = _stripeToken.StripeCard;
+		};
 
-        Behaves_like<customer_behaviors> behaviors;
-    }
+		Behaves_like<customer_behaviors> behaviors;
+	}
 }

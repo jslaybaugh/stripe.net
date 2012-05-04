@@ -17,32 +17,32 @@ namespace Stripe
 
 			var response = Requestor.GetString(url, LiveMode);
 
-            return Mapper<StripeInvoice>.MapFromJson(response);
-        }
+			return Mapper<StripeInvoice>.MapFromJson(response);
+		}
 
-        public StripeInvoice Upcoming(string customerId)
-        {
-            var url = string.Format("{0}/{1}", Urls.Invoices, "upcoming");
+		public virtual StripeInvoice Upcoming(string customerId)
+		{
+			var url = string.Format("{0}/{1}", Urls.Invoices, "upcoming");
 
-            url = ParameterBuilder.ApplyParameterToUrl(url, "customer", customerId);
-
-			var response = Requestor.GetString(url, LiveMode);
-
-            return Mapper<StripeInvoice>.MapFromJson(response);
-        }
-
-        public IEnumerable<StripeInvoice> List(int count = 10, int offset = 0, string customerId = null)
-        {
-            var url = Urls.Invoices;
-            url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());
-            url = ParameterBuilder.ApplyParameterToUrl(url, "offset", offset.ToString());
-
-            if(!string.IsNullOrEmpty(customerId))
-                url = ParameterBuilder.ApplyParameterToUrl(url, "customer", customerId);
+			url = ParameterBuilder.ApplyParameterToUrl(url, "customer", customerId);
 
 			var response = Requestor.GetString(url, LiveMode);
 
-            return Mapper<StripeInvoice>.MapCollectionFromJson(response);
-        }
-    }
+			return Mapper<StripeInvoice>.MapFromJson(response);
+		}
+
+		public virtual IEnumerable<StripeInvoice> List(int count = 10, int offset = 0, string customerId = null)
+		{
+			var url = Urls.Invoices;
+			url = ParameterBuilder.ApplyParameterToUrl(url, "count", count.ToString());
+			url = ParameterBuilder.ApplyParameterToUrl(url, "offset", offset.ToString());
+
+			if(!string.IsNullOrEmpty(customerId))
+				url = ParameterBuilder.ApplyParameterToUrl(url, "customer", customerId);
+
+			var response = Requestor.GetString(url, LiveMode);
+
+			return Mapper<StripeInvoice>.MapCollectionFromJson(response);
+		}
+	}
 }
